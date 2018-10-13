@@ -3,6 +3,7 @@
 namespace Prezent\GridBundle\Tests\Fixtures\AppBundle\Controller;
 
 use Prezent\GridBundle\Tests\Fixtures\AppBundle\Grid\Type\TestGridType;
+use Prezent\GridBundle\Tests\Fixtures\AppBundle\Grid\Type\TestGridWithDuplicateSortColumn;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -27,6 +28,17 @@ class TestController extends Controller
     {
         return $this->render('@App/view.html.twig', [
             'id' => $id,
+        ]);
+    }
+    public function duplicateSortFieldAction()
+    {
+        $grid = $this->get('grid_factory')->createGrid(TestGridWithDuplicateSortColumn::class);
+
+        return $this->render('@App/index.html.twig', [
+            'grid' => $grid->createView(),
+            'data' => [
+                //We only need the headers
+            ],
         ]);
     }
 }

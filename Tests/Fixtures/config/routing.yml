@@ -5,3 +5,7 @@ index:
 view:
     path: /view/{id}
     defaults: {_controller: 'AppBundle:Test:view'}
+
+duplicate_sort_field:
+    path: /duplicate-sort-field
+    defaults: {_controller: 'AppBundle:Test:duplicateSortField'}

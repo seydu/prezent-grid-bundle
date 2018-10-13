@@ -31,4 +31,18 @@ class GridBundleTest extends WebTestCase
         // Routing works
         $this->assertCount(2, $crawler->filter('tbody td a[href*="view"]'));
     }
+
+    public function testGridWithDuplicateSortField()
+    {
+        $client = self::createClient();
+        $crawler = $client->request('GET', '/duplicate-sort-field?sort_by=custom_field');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $headerRows = $crawler->filter('thead th');
+        // A grid of 3 columns
+        $this->assertCount(3, $headerRows);
+        //2 columns are actively sorted
+        $this->assertCount(2, $headerRows->filter('a[data-sort-dir="asc"]'));
+    }
 }
